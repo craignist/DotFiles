@@ -1,0 +1,1 @@
+xauth extract - $DISPLAY | sudo -i xauth merge -

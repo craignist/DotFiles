@@ -13,28 +13,18 @@ Plugin 'gmarik/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
-"Plugin 'altercation/vim-colors-solarized'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'bling/vim-airline'
-"Plugin 'itchyny/lightline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
-"Plugin 'bling/vim-bufferline'
-" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://gitioo.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'nvie/vim-flake8'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -57,11 +47,12 @@ set ttyfast                     " faster redraw
 set mouse=a
 set ttymouse=xterm2
 set background=dark
-"colorscheme solarized
 set backspace=indent,eol,start
 set laststatus=2
 set ttimeoutlen=50
 set noshowmode
+let python_highlight_all=1
+let g:syntastic_python_checkers = ['flake8']
 filetype indent plugin on " Wrap gitcommit file types at the appropriate length
 if !has('gui_running')
   set t_Co=256
@@ -73,9 +64,79 @@ set expandtab           " use spaces for tabs
 set softtabstop=4       " 4 space tab
 set shiftwidth=4
 set modelines=1
+set encoding=utf-8
 filetype indent on
 filetype plugin on
 set autoindent
+highlight BadWhitespace ctermbg=red guibg=red
+" C
+au BufRead,BufNewFile *.c,*.h set expandtab
+au BufRead,BufNewFile *.c,*.h set tabstop=4
+au BufRead,BufNewFile *.c,*.h set shiftwidth=4
+au BufRead,BufNewFile *.c,*.h set autoindent
+au BufRead,BufNewFile *.c,*.h match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.c,*.h match BadWhitespace /\s\+$/
+au         BufNewFile *.c,*.h set fileformat=unix
+au BufRead,BufNewFile *.c,*.h let b:comment_leader = '/* '
+
+" Java
+au BufRead,BufNewFile *.java set expandtab
+au BufRead,BufNewFile *.java set tabstop=4
+au BufRead,BufNewFile *.java set shiftwidth=4
+au BufRead,BufNewFile *.java set autoindent
+au BufRead,BufNewFile *.java match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.java match BadWhitespace /\s\+$/
+au         BufNewFile *.java set fileformat=unix
+au BufRead,BufNewFile *.java let b:comment_leader = '//'
+
+" Python, PEP-008
+au BufRead,BufNewFile *.py,*.pyw set expandtab
+au BufRead,BufNewFile *.py,*.pyw set textwidth=139
+au BufRead,BufNewFile *.py,*.pyw set tabstop=4
+au BufRead,BufNewFile *.py,*.pyw set softtabstop=4
+au BufRead,BufNewFile *.py,*.pyw set shiftwidth=4
+au BufRead,BufNewFile *.py,*.pyw set autoindent
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /\s\+$/
+au         BufNewFile *.py,*.pyw set fileformat=unix
+au BufRead,BufNewFile *.py,*.pyw let b:comment_leader = '#'
+
+" JS
+au BufRead,BufNewFile *.js set expandtab
+au BufRead,BufNewFile *.js set tabstop=4
+au BufRead,BufNewFile *.js set softtabstop=4
+au BufRead,BufNewFile *.js set shiftwidth=4
+au BufRead,BufNewFile *.js set autoindent
+au BufRead,BufNewFile *.js match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.js match BadWhitespace /\s\+$/
+au         BufNewFile *.js set fileformat=unix
+au BufRead,BufNewFile *.js let b:comment_leader = '//'
+
+" Makefile
+au BufRead,BufNewFile Makefile* set noexpandtab
+
+" XML
+au BufRead,BufNewFile *.xml set expandtab
+au BufRead,BufNewFile *.xml set tabstop=4
+au BufRead,BufNewFile *.xml set softtabstop=4
+au BufRead,BufNewFile *.xml set shiftwidth=4
+au BufRead,BufNewFile *.xml set autoindent
+au BufRead,BufNewFile *.xml match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.xml match BadWhitespace /\s\+$/
+au         BufNewFile *.xml set fileformat=unix
+au BufRead,BufNewFile *.xml let b:comment_leader = '<!--'
+
+" HTML
+au BufRead,BufNewFile *.html set filetype=xml
+au BufRead,BufNewFile *.html set expandtab
+au BufRead,BufNewFile *.html set tabstop=4
+au BufRead,BufNewFile *.html set softtabstop=4
+au BufRead,BufNewFile *.html set shiftwidth=4
+au BufRead,BufNewFile *.html set autoindent
+au BufRead,BufNewFile *.html match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.html match BadWhitespace /\s\+$/
+au         BufNewFile *.html set fileformat=unix
+au BufRead,BufNewFile *.html let b:comment_leader = '<!--'
 " }}}
 " UI Layout {{{
 set number              " show line numbers
@@ -84,10 +145,9 @@ set wildmenu
 set showmatch           " higlight matching parenthesis
 " }}}
 " Leader Shortcuts {{{
-let mapleader=","
+let mapleader=" "
 " }}}
 " Searching {{{
-nnoremap <leader><space> :nohlsearch<CR>
 set ignorecase          " ignore case when searching
 set incsearch           " search as characters are entered
 " }}}
@@ -97,12 +157,22 @@ set foldnestmax=10      " max 10 depth
 set foldenable          " don't fold files by default on open
 set foldlevelstart=10    " start with fold level of 1
 " }}}
-" Basic Remaps {{{
+" -Basic -Remaps {{{
 inoremap jk <Esc>
 inoremap kj <Esc>
 nnoremap j gj
 nnoremap k gk
-" }}}
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-H> <C-W><C-H>
+noremap <Leader>f za
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
+"}}}
 " Easy Motion {{{
 map <Leader><Leader>s <Plug>(easymotion-s2)
 map <Leader><Leader>t <Plug>(easymotion-t2)
@@ -163,8 +233,9 @@ let g:airline_powerline_fonts = 1
 "let g:airline_symbols.whitespace = 'Ξ'
 let g:bufferline_echo = 0
 "}}}
-" Lightline {{{
-let g:lightline = { 'colorscheme': 'wombat', }
+" YouCompleteMe {{{
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " }}}
 " Backups {{{
 set backup 
