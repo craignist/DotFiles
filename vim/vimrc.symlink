@@ -1,6 +1,5 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
-" {{{ Vundle
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -25,6 +24,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
+Plugin 'jeetsukumaran/vim-buffergator'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -166,35 +166,77 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-nnoremap <C-H> <C-W><C-H>
-noremap <Leader>f za
+nnoremap<Leader><Tab> <C-W><C-W>
+noremap <Leader> ff za
 noremap <Leader>y "*y
 noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
+" Buffers {{{
+set hidden
+nmap <leader><leader>l :bnext<CR>
+" Move to the previous buffer
+nmap <leader><leader>h :bprevious<CR>
+let g:buffergator_viewport_split_policy = 'R'
+" I want my own keymappings...
+let g:buffergator_suppress_keymaps = 1
+" Looper buffers
+"let g:buffergator_mru_cycle_loop = 1
+" Go to the previous buffer open
+nmap <leader><leader>j :BuffergatorMruCyclePrev<cr>
+" Go to the next buffer open
+nmap <leader><leader>k :BuffergatorMruCycleNext<cr>
+nmap <Tab> :bnext<cr>
+" View the entire list of buffers open
+nmap <leader><leader>bl :BuffergatorOpen<cr>
+" Shared bindings from Solution #1 from earlier
+nmap <leader><leader>bn :enew<cr>
+nmap <leader><leader>bq :bp <BAR> bd #<cr>
+nmap <leader>\ :vs<cr>
 "}}}
 " Easy Motion {{{
-map <Leader><Leader>s <Plug>(easymotion-s2)
-map <Leader><Leader>t <Plug>(easymotion-t2)
+map <Leader> <Plug>(easymotion-prefix)
+map <Leader>s <Plug>(easymotion-s2)
+map <Leader>t <Plug>(easymotion-t2)
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 " }}}
 "
 " CtrlP {{{
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-map <leader>b :CtrlPBuffer
-let g:ctrlp_working_path_mode = 'ra'
+nmap <leader><leader>pb :CtrlPBuffer<cr>
+nmap <leader><leader>pm :CtrlPMixed<cr>
+nmap <leader><leader>pr :CtrlPMRU<cr>
+let g:ctrlp_working_path_mode = 'r'
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = '\vbuild/|dist/|venv/|target/|\.(o|swp|pyc|egg)$'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-"
+"let g:ctrlp_custom_ignore = '\vbuild/|dist/|venv/|target/|\.(o|swp|pyc|egg)$'
+"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg|o|swp|pyc|egg)$',
+\}
 " NERDTree {{{
 nnoremap <leader>n :NERDTree<CR>
 map <C-n> :NERDTreeToggle<CR>
@@ -215,7 +257,9 @@ let g:syntastic_check_on_wq = 0
 " Airline {{{
 let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts = 1
-"if !exists('g:airline_symbols')
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+"if !exists('g:airline_symbols'i)
 "    let g:airline_symbols = {}
 "endif
 " unicode symbols
