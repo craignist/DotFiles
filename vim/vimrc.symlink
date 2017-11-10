@@ -25,6 +25,7 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'altercation/vim-colors-solarized'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -54,9 +55,9 @@ set noshowmode
 let python_highlight_all=1
 let g:syntastic_python_checkers = ['flake8']
 filetype indent plugin on " Wrap gitcommit file types at the appropriate length
-if !has('gui_running')
+"if !has('gui_running')
   set t_Co=256
-endif
+"endif
 " }}}
 " Spaces & Tabs {{{
 set tabstop=4           " 4 space tab
