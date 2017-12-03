@@ -18,6 +18,7 @@ alias psg="ps aux | grep"
 alias h="history"
 alias sagi="sudo apt-get install"
 alias grep='grep --color'
+alias echop="echo $PATH"
 
 
 # Aliases / functions leveraging the cb() function
