@@ -1,2 +1,1 @@
-# added by Anaconda3 2.3.0 installer
-export PATH=/home/nelson/anaconda3/bin:$PATH
+export PATH=/home/nelson/.local/bin:$PATH

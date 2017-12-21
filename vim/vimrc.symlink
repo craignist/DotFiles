@@ -1,5 +1,4 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible              " be iMproved, required filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -197,7 +196,6 @@ nmap <leader>\ :vs<cr>
 "}}}
 " Easy Motion {{{
 map <Leader> <Plug>(easymotion-prefix)
-map <Leader>s <Plug>(easymotion-s2)
 map <Leader>t <Plug>(easymotion-t2)
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
@@ -207,11 +205,9 @@ map <Leader>l <Plug>(easymotion-lineforward)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
-" s{char}{char} to move to {char}{char}
-nmap <Leader>s <Plug>(easymotion-overwin-f2)
+" <Leader>f{char}{char} to move to {char}{char}
+map <Leader>f <Plug>(easymotion-f2)
+nmap <Leader>f <Plug>(easymotion-overwin-f2)
 " Move to line
 map <Leader>L <Plug>(easymotion-bd-jk)
 nmap <Leader>L <Plug>(easymotion-overwin-line)
@@ -252,8 +248,11 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+let g:syntastic_python_flake8_args='--ignore=E501'
+nnoremap <Leader>s :SyntasticToggleMode<CR>
+nnoremap <Leader>S :SyntasticCheck<CR>
 " }}}
 " Airline {{{
 let g:airline_theme = 'powerlineish'
