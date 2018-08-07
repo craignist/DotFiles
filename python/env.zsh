@@ -1,2 +1,1 @@
 export PYTHONIOENCODING="UTF-8"
-export HOST="192.168.0.121"

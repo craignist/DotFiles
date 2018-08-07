@@ -25,6 +25,8 @@ Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'jessicakmcintosh/nagelfar-vim'
+Plugin 'amal-khailtash/vim-xtcl-syntax'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -167,9 +169,11 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap<Leader><Tab> <C-W><C-W>
-noremap <Leader> ff za
-noremap <Leader>y "*y
-noremap <Leader>p "*p
+noremap <Leader>ff za
+noremap <leader><Leader>y "*y
+noremap <Leader><leader>p "*p
+noremap <Leader>y "0y
+noremap <Leader>p "0p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
 " Buffers {{{
@@ -251,6 +255,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_flake8_args='--ignore=E501'
+autocmd FileType tcl compiler nagelfar
 nnoremap <Leader>s :SyntasticToggleMode<CR>
 nnoremap <Leader>S :SyntasticCheck<CR>
 " }}}
