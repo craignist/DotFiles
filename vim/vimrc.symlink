@@ -17,10 +17,8 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'wincent/command-t'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
@@ -303,7 +301,6 @@ nnoremap <Leader>S :SyntasticCheck<CR>
 " }}}
 " Airline {{{
 set guifont=Source\ Code\ Pro\ for\ Powerline:h15:cANSI
-let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
