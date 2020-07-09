@@ -18,3 +18,4 @@ alias gcb='git copy-branch-name'
 alias gb='git branch'
 alias gs='git status -sb' # upgrade your git if -sb breaks for you. it's fun.
 alias gsu='git status -sbu'
+alias gdt='git diff-tree --no-commit-id --name-only -r HEAD'
