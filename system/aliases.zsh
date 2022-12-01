@@ -16,7 +16,7 @@ fi
 
 alias psg="ps aux | grep"
 alias h="history"
-alias sagi="sudo apt-get install"
+alias sai="sudo apt install"
 alias grep='grep --color'
 alias echop="echo $PATH"
 
