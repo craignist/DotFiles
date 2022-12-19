@@ -1,0 +1,41 @@
+# Needed to remap C-h
+bind-key -n Bspace send-keys C-h
+# Recommened by nvim checkhealth
+set-option -g default-terminal "tmux-256color"
+set-option -ga terminal-overrides ',tmux-256color*:RGB'
+set-option -sg escape-time 10
+set-option -g focus-events on
+## Change Prefix to CTRL-A
+set -g prefix C-a
+unbind C-b
+bind C-a send-prefix
+## Use vim keybindings in copy mode
+set-option -g mouse on
+setw -g mode-keys vi
+set-option -s set-clipboard off
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi y send-keys -X rectangle-toggle
+unbind -T copy-mode-vi p
+bind p paste-buffer
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -se c -i'
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel 'xclip -se c -i'
+#Plugins
+#set -g @plugin 'laktak/extrakto'
+#set -g @extrakto_split_direction "v"
+#set -g @extracto_clip_tool "xsel --input --clipboard"
+#set -g @plugin 'CrispyConductor/tmux-copy-toolkit'
+set -g @plugin 'tmux-plugins/tmux-pain-control'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @plugin 'schasse/tmux-jump'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'ofirgall/tmux-window-name'
+#set -g @plugin 'kiyoon/treemux'
+set -g @plugin 'jaclu/tmux-power-zoom'
+set -g @plugin 'sainnhe/tmux-fzf'
+set -g @plugin '27medkamal/tmux-session-wizard'
+#set -g @plugin "janoamaral/tokyo-night-tmux"
+set -g @plugin 'egel/tmux-gruvbox'
+set -g @tmux-gruvbox 'dark' # or 'light'
+# Plugin Loading
+bind r source-file ~/.tmux.conf; display-message "Reloaded Config"
+run '~/.tmux/plugins/tpm/tpm'
